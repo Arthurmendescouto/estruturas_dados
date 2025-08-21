@@ -1,5 +1,3 @@
-package PilhaEstatica.src;
-
 public interface StackOperations {
     void push(Object data);
     Object pop();
