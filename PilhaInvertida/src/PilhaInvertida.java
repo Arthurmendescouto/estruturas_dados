@@ -1,4 +1,4 @@
-public class PilhaInvertida implements StackOperations {
+public class PilhaInvertida implements InvertedStackOperations {
     private int topIndex;
     private Object[] data;
 

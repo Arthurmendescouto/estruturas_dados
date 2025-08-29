@@ -1,4 +1,4 @@
-public interface StackOperations {
+public interface InvertedStackOperations {
     void push(Object data);
     Object pop();
     Object peek();
