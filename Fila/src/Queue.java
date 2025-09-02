@@ -1,4 +1,4 @@
-public class Queue implements QueueInterface {
+ public class Queue implements QueueInterface {
 
     private int head;
     private int tail;
@@ -56,6 +56,8 @@ public class Queue implements QueueInterface {
     public void endUpdate(Object item) {
         if(!isEmpty()){
             data[tail] = item;
+        }else{
+            System.err.println("A pilha está vazia!");
         }
     }
 
