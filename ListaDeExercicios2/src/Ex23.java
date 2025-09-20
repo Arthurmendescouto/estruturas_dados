@@ -9,7 +9,7 @@ public class Ex23 {
         for (int i = 0; i <array1.length; i++) {
         novoArray[i]=array1[i];
         }
-        for (int i = 0; i <array1.length; i++) {
+        for (int i = 0; i <array2.length; i++) {
             novoArray[array1.length+i]=array2[i];
         }
         System.out.println("Novo array: ");
