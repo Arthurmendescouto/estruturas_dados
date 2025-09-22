@@ -14,7 +14,7 @@ public class Ex28 {
               if(i==0){
                   fibonacci[i]=0;
               }else if(i==1){
-
+                fibonacci[i]=1;
               }else{
                   fibonacci[i]=fibonacci[i-1]+fibonacci[i-2];
               }
