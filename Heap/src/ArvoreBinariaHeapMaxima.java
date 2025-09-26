@@ -61,6 +61,7 @@ public class ArvoreBinariaHeapMaxima {
     }
 
 
+
     public boolean isEmpty() {
         return tail == -1;
     }
