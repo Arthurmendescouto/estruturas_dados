@@ -30,7 +30,10 @@ public class Ex5 {
         }
         sc.close();
         System.out.println("\n--- Resultados ---");
-        imprimir
+        imprimirVetor("Vetor Principal (Todos os 20 números)",vetorPrincipal,vetorPrincipal.length);
+
+        imprimirVetor("Vetor de números pares",vetorPar,countPar);
+        imprimirVetor("Vetor de números impares",vetorImpar,countImpar);
     }
     public static  void imprimirVetor(String titulo, int[] vetor, int tamanhoReal){
         System.out.println("\n"+titulo+":");
