@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Ex9 {
+public class Ex09 {
     public static void main(String[] args) {
         final int tamanho_vetor=10;
         int[] vetorA=new int[tamanho_vetor];

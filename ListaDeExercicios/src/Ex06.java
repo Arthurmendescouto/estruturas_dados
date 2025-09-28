@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-    public class Ex6 {
+    public class Ex06 {
         public static void main(String[] args) {
 
             final int NUM_ALUNOS = 10;

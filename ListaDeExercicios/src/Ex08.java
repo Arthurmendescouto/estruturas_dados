@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Ex8 {
+public class Ex08 {
     public static void main(String[] args) {
         final int num_pessoas=5;
         int[] idades=new int[num_pessoas];
