@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class ex14 {
+public class Ex14 {
     public static void main(String[] args) {
         int[] numeros={10,15,8,40,22};
         Arrays.sort(numeros);
