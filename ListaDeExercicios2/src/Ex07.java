@@ -1,4 +1,4 @@
-public class Ex7 {
+public class Ex07 {
     public static void main(String[] args) {
         int[] numeros={5,8,12,3,7,9,4};
         int soma=0;

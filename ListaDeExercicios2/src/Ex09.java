@@ -1,4 +1,4 @@
-public class Ex9 {
+public class Ex09 {
     public static void main(String[] args) {
         int[] numeros={10,15,8,23,42,7,18};
         int contPares=0;
