@@ -1,4 +1,3 @@
-package Stack_Dinamica;
 
 public class DoubleNode<T> {
 private T data;
