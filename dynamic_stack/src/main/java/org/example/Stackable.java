@@ -1,9 +1,10 @@
+package dynamic_stack.src.main.java.org.example;
 
 public interface Stackable<T> {
 
         void push(T data);
-        Object pop();
-        Object peek();
+        T pop();
+        T peek();
         void update(T item);
 
         boolean isFull();

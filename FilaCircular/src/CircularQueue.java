@@ -88,5 +88,4 @@ public class CircularQueue implements CircularQueueInterface {
     public int next(int pointer){
     return (pointer+1)%data.length;
     };
-
 }

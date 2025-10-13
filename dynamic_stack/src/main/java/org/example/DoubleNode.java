@@ -1,3 +1,4 @@
+package dynamic_stack.src.main.java.org.example;
 
 public class DoubleNode<T> {
 private T data;
