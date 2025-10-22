@@ -1,4 +1,4 @@
-package dynamic_stack.src.main.java.org.example;
+package LinkedStack.src.main.java.org.example;
 
 public class Main {
     public static void main(String[] args) {

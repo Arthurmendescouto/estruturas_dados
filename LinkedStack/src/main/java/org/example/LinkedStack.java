@@ -1,4 +1,4 @@
-package dynamic_stack.src.main.java.org.example;
+package LinkedStack.src.main.java.org.example;
 
 import java.util.NoSuchElementException;
 
