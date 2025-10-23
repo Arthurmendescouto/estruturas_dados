@@ -22,7 +22,10 @@ public class LinkedDEQue<T> implements Queueable<T> {
     }
 
     public void beginEnqueue(T data) {
-
+        if(isFull()) {
+            throw new NoSuchElementException("Fila Cheia!");
+        }
+        
     }
 
     public void endEnqueue(T data) {
