@@ -43,7 +43,19 @@ result.append(aluno);
     }
 
     public String[] culturaOuExtensaoSemEsporte() {
+ArrayList result=new ArrayList();
+for (String aluno:alunosA){
+if(!contains(aluno,alunosB) && !contains(aluno,(String[])result.selectAll())){
+result.append(aluno);
+}
+}
+        for (String aluno:alunosC){
+            if(!contains(aluno,alunosB) && !contains(aluno,(String[]) result.selectAll())){
+                result.append(aluno);
+            }
+        }
 
+return (String[])result.selectAll();
     }
 
 
