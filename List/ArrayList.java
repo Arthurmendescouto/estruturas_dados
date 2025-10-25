@@ -38,19 +38,19 @@ public class ArrayList implements Listable {
             head = prior(head);
         } else {
             int physicalIndex = map(index);
-            int aux=tail;
-            for (int i = 0; i <numberElements-index; i++) {
-                data[next(aux)]=data[aux];
-                aux=prior(aux);
+            int aux = tail;
+            for (int i = 0; i < numberElements - index; i++) {
+                data[next(aux)] = data[aux];
+                aux = prior(aux);
             }
-            data[physicalIndex]=item;
-            tail=next(tail);
+            data[physicalIndex] = item;
+            tail = next(tail);
         }
         numberElements++;
     }
 
     @Override
-    public Object delete(int index){
+    public Object delete(int index) {
         if (isEmpty()) {
             System.out.println("List is empty!");
             return null;
@@ -60,23 +60,21 @@ public class ArrayList implements Listable {
             System.err.println("Invalided Index");
             return null;
         }
-        int physicalIndex=map(index);
+        int physicalIndex = map(index);
         Object removedElement=data[physicalIndex];
-
-        if (index < numberElements / 2){
-            int aux=physicalIndex;
+        int aux = physicalIndex;
+        if (index < data.length / 2) {
             for (int i = 0; i <index ; i++) {
-            data[aux]=data[prior(aux)];
-            aux=prior(aux);
+                data[aux]=data[prior(aux)];
+                aux=prior(aux);
+                head=next(head);
             }
-            head=next(head);
-        }else{
-            int aux=physicalIndex;
-            for (int i = 0; i <numberElements-index -1; i++) {
-                data[aux]=data[next(aux)];
-                aux=next(aux);
+        } else {
+            for (int i = 0; i < numberElements - index - 1; i++) {
+                data[aux] = data[next(aux)];
+                aux = next(aux);
             }
-            tail=prior(tail);
+            tail = prior(tail);
         }
         numberElements--;
         return removedElement;
@@ -95,7 +93,7 @@ public class ArrayList implements Listable {
 
     @Override
     public void update(int index, Object item) {
-        if(isEmpty()){
+        if (isEmpty()) {
             System.out.println("List is empty!");
             return;
         }
@@ -103,8 +101,8 @@ public class ArrayList implements Listable {
             System.err.println("Invalid Index");
             return;
         }
-        int physicalIndex=map(index);
-        data[physicalIndex]=item;
+        int physicalIndex = map(index);
+        data[physicalIndex] = item;
     }
 
     @Override

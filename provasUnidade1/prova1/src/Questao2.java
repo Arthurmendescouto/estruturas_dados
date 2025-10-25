@@ -1,4 +1,4 @@
-public class Questao2 {
+/*public class Questao2 {
     public String decToBin(String data) {
         int dividendo = Integer.parseInt(data);
         if (dividendo == 0) {return "0"; }
@@ -19,4 +19,4 @@ public class Questao2 {
         System.out.println(q3.decToBin("255"));
         System.out.println(q3.decToBin("35"));
     }
-}
+}*/
