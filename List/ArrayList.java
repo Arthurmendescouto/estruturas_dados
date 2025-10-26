@@ -61,13 +61,13 @@ public class ArrayList implements Listable {
             return null;
         }
         int physicalIndex = map(index);
-        Object removedElement=data[physicalIndex];
+        Object removedElement = data[physicalIndex];
         int aux = physicalIndex;
         if (index < data.length / 2) {
-            for (int i = 0; i <index ; i++) {
-                data[aux]=data[prior(aux)];
-                aux=prior(aux);
-                head=next(head);
+            for (int i = 0; i < index; i++) {
+                data[aux] = data[prior(aux)];
+                aux = prior(aux);
+                head = next(head);
             }
         } else {
             for (int i = 0; i < numberElements - index - 1; i++) {
@@ -121,14 +121,15 @@ public class ArrayList implements Listable {
         int aux = head;
         for (int i = 0; i < numberElements; i++) {
             result += data[aux];
-            aux = next(aux);
-            if (i != numberElements - 1) {
+            aux=next(aux);
+            if(i!=numberElements-1){
                 result += ", ";
             }
         }
-        return result;
+return result;
     }
 
+    
     @Override
     public void clear() {
         head = 0;
