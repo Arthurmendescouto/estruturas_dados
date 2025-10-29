@@ -27,6 +27,7 @@ public class ArrayList implements Listable {
             System.err.println("Invalided Index");
             return;
         }
+
         if (index < numberElements / 2) {
             int physicalIndex = map(index);
             int aux = head;
@@ -36,7 +37,8 @@ public class ArrayList implements Listable {
             }
             data[physicalIndex] = item;
             head = prior(head);
-        } else {
+        }
+        else {
             int physicalIndex = map(index);
             int aux = tail;
             for (int i = 0; i < numberElements - index; i++) {
@@ -121,15 +123,15 @@ public class ArrayList implements Listable {
         int aux = head;
         for (int i = 0; i < numberElements; i++) {
             result += data[aux];
-            aux=next(aux);
-            if(i!=numberElements-1){
+            aux = next(aux);
+            if (i != numberElements - 1) {
                 result += ", ";
             }
         }
-return result;
+        return result;
     }
 
-    
+
     @Override
     public void clear() {
         head = 0;

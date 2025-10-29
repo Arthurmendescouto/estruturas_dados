@@ -1,4 +1,4 @@
-package prova2024;
+package provasUnidade1.prova2024;
 
 public class Q3 {
     public String imprimirInicioParaPosicao(int posicao){

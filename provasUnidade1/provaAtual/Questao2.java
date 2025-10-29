@@ -3,6 +3,9 @@ package provasUnidade1.provaAtual;
 
 import List.ArrayList;
 
+import java.util.Random;
+
+
 public class Questao2 {
     String[] alunosA;
     String[] alunosB;
@@ -85,3 +88,4 @@ return (String[])result.selectAll();
         System.out.println("c) Cultura ou Extensão, sem Esporte: " + q2.culturaOuExtensaoSemEsporte());   // Alice, Caro, Gael
     }
 }
+

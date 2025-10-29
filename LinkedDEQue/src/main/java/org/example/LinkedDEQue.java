@@ -25,19 +25,47 @@ public class LinkedDEQue<T> implements Queueable<T> {
         if(isFull()) {
             throw new NoSuchElementException("Fila Cheia!");
         }
-
+        DoubleNode<T> temp=new DoubleNode<>();
+        temp.setData(data);
+        if(!isEmpty()){
+            head.setPrevious(temp);
+        }else {
+            tail=temp;
+        }
+        temp.setNext(head);
+    head=temp;
+    amount++;
     }
 
     public void endEnqueue(T data) {
+        if(isFull()) {
+            throw new NoSuchElementException("Fila Cheia!");
+        }
+        DoubleNode<T> temp=new DoubleNode<>();
+        temp.setData(data);
+        if(!isEmpty()){
+            tail.setNext(temp);
+        }else{
+            head=temp;
+        }
+        temp.setPrevious(tail);
+        tail=temp;
+        amount++;
 
     }
 
     public void beginUpdate(T data) {
-
+if(isEmpty()){
+    throw new NoSuchElementException("Fila cheia!");
+}
+head.setData(data);
     }
 
     public void endUpdate(T data) {
-
+        if(isEmpty()){
+            throw new NoSuchElementException("Fila cheia!");
+        }
+        tail.setData(data);
     }
 
 
@@ -73,29 +101,51 @@ public class LinkedDEQue<T> implements Queueable<T> {
     }
 
     public String printRear() {
-        String res = "";
+        String res = "[";
+        DoubleNode<T> nodeAux=head;
         for (int i = 0; i < amount; i++) {
-            res += auxPointer.getData();
+            res += nodeAux.getData();
             if (i != amount - 1) {
                 res += ", ";
             }
+            nodeAux=nodeAux.getNext();
         }
+        return res+"]";
     }
 
     public String printFront() {
-
+        String res = "[";
+        DoubleNode<T> nodeAux=tail;
+        for (int i = 0; i < amount; i++) {
+            res += nodeAux.getData();
+            if (i != amount - 1) {
+                res += ", ";
+            }
+            nodeAux=nodeAux.getPrevious();
+        }
+        return res+"]";
     }
 
     public T front() {
+        if(isEmpty()){
+            throw new NoSuchElementException("Fila vazia!");
+        }
+        return head.getData();
     }
 
     public T rear() {
+        if(isEmpty()){
+            throw new NoSuchElementException("Fila vazia!");
+        }
+        return tail.getData();
     }
 
     public boolean isEmpty() {
+        return (amount==0);
     }
 
     public boolean isFull() {
+        return (amount==capacity);
     }
 
 }

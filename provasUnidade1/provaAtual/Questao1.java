@@ -1,3 +1,4 @@
+
 package provasUnidade1.provaAtual;
 
 import List.ArrayList;
@@ -5,16 +6,17 @@ import List.ArrayList;
 class Client {
     int clientCPF;
     String name;
+
     public Client(int clientCPF, String name) {
         this.clientCPF = clientCPF;
         this.name = name;
     }
 }
 
-// Pedido
 class Order {
     int clientCPF;
     double value;
+
     public Order(int clientCPF, double value) {
         this.clientCPF = clientCPF;
         this.value = value;
