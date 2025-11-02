@@ -1,49 +1,94 @@
-package CarProject;
+package CarProject.dao;
 
-import CarProject.dao.CarDAO;
-import LinkedStack.src.main.java.org.example.LinkedStack;
+import CarProject.dao.repository.list.LinkedList;
+import CarProject.dao.repository.list.Listable;
+import CarProject.model.Car;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-public class CarDAOLinkedStack implements CarDAO {
+public class CarDAOLinkedList implements CarDAO {
 
-    private Stackable<Car> cars = new LinkedStack<>(20);
+    private Listable<Car> cars = new LinkedList<>();
 
     // Operações básicas CRUD
     @Override
     public void addCar(Car car) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+        if (car == null) {
+            throw new IllegalArgumentException("Carro não pode ser null");
+        }
+        String place = car.getLicensePlate();
+        if (place == null || place.isEmpty()) {
+            throw new IllegalArgumentException("A placa não pode ser nula ou vazia");
+        }
+
+        int index = findIndexByPlace(place);
+        if (index != -1) { // já existe
+            throw new IllegalArgumentException("Já existe um carro com esta placa: " + place);
+        }
+        cars.append(car);
+
     }
 
     @Override
     public Car getCar(String plateLicense) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+        int index = findIndexByPlace(plateLicense);
+        if (index == -1) {
+            return null;
+        }
+        return cars.select(index);
     }
 
     @Override
     public Car[] getAllCars() {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+        Car[] all = new Car[cars.size()];
+        for (int i = 0; i < all.length; i++) {
+            all[i] = cars.select(i);
+        }
+        return all;
     }
 
     @Override
     public void updateCar(Car newCar) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+        if (newCar == null) {
+            throw new IllegalArgumentException("Carro não pode ser null");
+        }
+        int index = findIndexByPlace(newCar.getLicensePlate());
+        if (index == -1) {
+            throw new IllegalArgumentException("Nenhum carro encontrado com este placa: " + newCar.getLicensePlate());
+        }
+        cars.update(index, newCar);
     }
 
     @Override
     public Car deleteCar(String plateLicense) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+        int index = findIndexByPlace(plateLicense);
+        Car remove = cars.select(index);
+        cars.delete(index);
+        return remove;
     }
 
     // Operações de consulta específicas para carros
     @Override
     public Car getCarByLicensePlate(String licensePlate) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+        return getCar(licensePlate);
     }
 
     @Override
     public Car[] getCarsByMark(String mark) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+        if(mark == null || mark.isEmpty()) {
+            throw new IllegalArgumentException("Marca não pode ser nula ou  vazia");
+        }
+        List<Car> resultList = new ArrayList<>();
+
+        for (int i = 0; i <cars.size() ; i++) {
+            Car car = cars.select(i);
+            if (car.getLicensePlate().equals(mark)) {
+                resultList.add(car);
+            }
+        }
+        return resultList.toArray(new Car[0]);
     }
 
     @Override
@@ -167,5 +212,15 @@ public class CarDAOLinkedStack implements CarDAO {
     @Override
     public Car[] getCarsWithLongParking(long thresholdHours) {
         throw new UnsupportedOperationException("Operação ainda não implementada");
+    }
+
+    private int findIndexByPlace(String plate) {
+        for (int i = 0; i < cars.size(); i++) {
+            Car current = cars.select(i);
+            if (current.getLicensePlate().equalsIgnoreCase(plate)) {
+                return i;
+            }
+        }
+        return -1;
     }
 }
