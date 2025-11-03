@@ -77,12 +77,12 @@ public class CarDAOLinkedList implements CarDAO {
 
     @Override
     public Car[] getCarsByMark(String mark) {
-        if(mark == null || mark.isEmpty()) {
+        if (mark == null || mark.isEmpty()) {
             throw new IllegalArgumentException("Marca não pode ser nula ou  vazia");
         }
         List<Car> resultList = new ArrayList<>();
 
-        for (int i = 0; i <cars.size() ; i++) {
+        for (int i = 0; i < cars.size(); i++) {
             Car car = cars.select(i);
             if (car.getLicensePlate().equals(mark)) {
                 resultList.add(car);
@@ -93,28 +93,78 @@ public class CarDAOLinkedList implements CarDAO {
 
     @Override
     public Car[] getCarsByModel(String model) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+        if (model == null || model.isEmpty()) {
+            throw new IllegalArgumentException("Modelo não pode ser nulo ou vazio");
+        }
+        List<Car> resultList = new ArrayList<>();
+        for (int i = 0; i < cars.size(); i++) {
+            Car car = cars.select(i);
+            if (car.getModel().equals(model)) {
+                resultList.add(car);
+            }
+        }
+        return resultList.toArray(new Car[0]);
     }
 
     @Override
     public Car[] getCarsByColor(String color) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+        if (color == null || color.isEmpty()) {
+            throw new IllegalArgumentException("Cor não pode ser nula ou vazio");
+        }
+        List<Car> resultList = new ArrayList<>();
+        for (int i = 0; i < cars.size(); i++) {
+            Car car = cars.select(i);
+            if (car.getColor().equals(color)) {
+                resultList.add(car);
+            }
+        }
+        return resultList.toArray(new Car[0]);
     }
 
     @Override
     public Car[] getCarsByOwner(String owner) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+        if (owner == null || owner.isEmpty()) {
+            throw new IllegalArgumentException("Proprietário não pode ser nulo ou vazio");
+        }
+        List<Car> resultList = new ArrayList<>();
+        for (int i = 0; i < cars.size(); i++) {
+            Car car = cars.select(i);
+            if (car.getOwnerName().equals(owner)) {
+                resultList.add(car);
+            }
+        }
+        return resultList.toArray(new Car[0]);
     }
 
     @Override
     public Car[] getCarsByMomentArrival(LocalDateTime initialMoment, LocalDateTime finalMoment) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+        if (initialMoment == null || finalMoment == null) {
+            throw new IllegalArgumentException("Os momentos inicial e final não podem ser nulos");
+        }
+        List<Car> resultList = new ArrayList<>();
+        for (int i = 0; i < cars.size(); i++) {
+            Car car = cars.select(i);
+            if (car.getArrived() != null &&
+                    (car.getArrived().isEqual(initialMoment) || car.getArrived().isAfter(initialMoment)) &&
+                    (car.getArrived().isEqual(finalMoment) || car.getArrived().isBefore(finalMoment))
+            ) {
+                resultList.add(car);
+            }
+        }
+        return resultList.toArray(new Car[0]);
     }
 
-    // Operações de análise e estatísticas
     @Override
     public Car getCarByNewestArrival() {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+if(cars.size()==0 ) return null;
+    Car newest=cars.select(0);
+        for (int i = 0; i <cars.size() ; i++) {
+            Car car = cars.select(i);
+            if(car.getArrived()!=null && newest.getArrived() !=null && car.getArrived().isAfter(newest.getArrived())) {
+                newest=car;
+            }
+        }
+        return newest;
     }
 
     @Override
@@ -206,12 +256,33 @@ public class CarDAOLinkedList implements CarDAO {
 
     @Override
     public long getAverageArrivalTime() {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+        if (cars.size() == 0) return 0;
+        long totalMinutes = 0;
+        int count = 0;
+        for (int i = 0; i < cars.size(); i++) {
+            Car car = cars.select(i);
+            if (car.getArrived() != null) {
+                totalMinutes += car.getArrived().getHour()*60 + car.getArrived().getMinute();
+                count++;
+            }
+        }
+        return count == 0?0 : totalMinutes/count;
     }
 
     @Override
     public Car[] getCarsWithLongParking(long thresholdHours) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+        List<Car> resultList = new ArrayList<>();
+        LocalDateTime now = LocalDateTime.now();
+        for (int i = 0; i < cars.size(); i++) {
+            Car car = cars.select(i);
+            if (car.getArrived() != null) {
+                long hours = java.time.Duration.between(now, car.getArrived()).toHours();
+                if (hours > thresholdHours) {
+                    resultList.add(car);
+                }
+            }
+        }
+        return resultList.toArray(new Car[0]);
     }
 
     private int findIndexByPlace(String plate) {

@@ -5,6 +5,10 @@ public class DoubleNode<T> {
     private DoubleNode<T> next;
     private DoubleNode<T> previous;
 
+    public DoubleNode(T data) {
+        this.data = data;
+    }
+
     public T getData() {
         return data;
     }
