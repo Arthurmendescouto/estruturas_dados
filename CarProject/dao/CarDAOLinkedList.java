@@ -11,6 +11,7 @@ import java.util.List;
 
 public class CarDAOLinkedList implements CarDAO {
 
+    // Operações básicas CRUD
     private Listable<Car> cars = new LinkedList<>();
 
     @Override
@@ -20,7 +21,7 @@ public class CarDAOLinkedList implements CarDAO {
         }
         String place = car.getLicensePlate();
         if (place == null || place.isEmpty()) {
-            throw new IllegalArgumentException("A placa não pode ser nula ou vazia");
+            throw new IllegalArgumentException("A placa não pode ser null ou vazia");
         }
 
         int index = findIndexByPlace(place);
@@ -78,7 +79,7 @@ public class CarDAOLinkedList implements CarDAO {
     @Override
     public Car[] getCarsByMark(String mark) {
         if (mark == null || mark.isEmpty()) {
-            throw new IllegalArgumentException("Marca não pode ser nula ou  vazia");
+            throw new IllegalArgumentException("Marca não pode ser null ou  vazia");
         }
         List<Car> resultList = new ArrayList<>();
 
@@ -94,7 +95,7 @@ public class CarDAOLinkedList implements CarDAO {
     @Override
     public Car[] getCarsByModel(String model) {
         if (model == null || model.isEmpty()) {
-            throw new IllegalArgumentException("Modelo não pode ser nulo ou vazio");
+            throw new IllegalArgumentException("Modelo não pode ser null ou vazio");
         }
         List<Car> resultList = new ArrayList<>();
         for (int i = 0; i < cars.size(); i++) {
@@ -109,7 +110,7 @@ public class CarDAOLinkedList implements CarDAO {
     @Override
     public Car[] getCarsByColor(String color) {
         if (color == null || color.isEmpty()) {
-            throw new IllegalArgumentException("Cor não pode ser nula ou vazio");
+            throw new IllegalArgumentException("Cor não pode ser null ou vazio");
         }
         List<Car> resultList = new ArrayList<>();
         for (int i = 0; i < cars.size(); i++) {
@@ -124,7 +125,7 @@ public class CarDAOLinkedList implements CarDAO {
     @Override
     public Car[] getCarsByOwner(String owner) {
         if (owner == null || owner.isEmpty()) {
-            throw new IllegalArgumentException("Proprietário não pode ser nulo ou vazio");
+            throw new IllegalArgumentException("Proprietário não pode ser null ou vazio");
         }
         List<Car> resultList = new ArrayList<>();
         for (int i = 0; i < cars.size(); i++) {
