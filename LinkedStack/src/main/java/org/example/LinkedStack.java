@@ -101,6 +101,9 @@ public class LinkedStack<T> implements Stackable<T> {
         topPointer.setData(newData);
 
     }
+    public int size(){
+        return numberElements;
+    }
 
     @Override
     public boolean isFull() {

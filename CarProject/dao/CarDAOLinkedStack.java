@@ -449,17 +449,32 @@ public class CarDAOLinkedStack implements CarDAO {
     // Operações de gerenciamento
     @Override
     public boolean isCarInPlaced(String plateLicense) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+        Stackable<Car> temp = new LinkedStack<>(20);
+        boolean found=false;
+
+        while (!cars.isEmpty()){
+            Car c=cars.pop();
+            if(c.getLicensePlate().equalsIgnoreCase(plateLicense))
+                found=true;
+            temp.push(c);
+        }
+        while (!temp.isEmpty()) cars.push(temp.pop());
+        return found;
     }
 
     @Override
     public void clearAllCars() {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
-    }
+while(!cars.isEmpty()) cars.pop();    }
 
     @Override
     public void removeCarsOlderThan(LocalDateTime date) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+Stackable<Car> temp=new LinkedStack<>(20);
+
+while (!cars.isEmpty()){
+    Car c=cars.pop();
+    if(c.getArrived().isAfter(date)) temp.push(c);
+}
+while (!temp.isEmpty()) cars.push(temp.pop());
     }
 
     @Override
@@ -520,7 +535,14 @@ public class CarDAOLinkedStack implements CarDAO {
 
     @Override
     public void removeCarsByOwner(String owner) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+Stackable<Car> temp= new LinkedStack<>(20);
+
+while (!cars.isEmpty()){
+    Car c=cars.pop();
+    if(!c.getOwnerName().equalsIgnoreCase(owner))
+        temp.push(c);
+}
+while (!temp.isEmpty()) cars.push(temp.pop());
     }
 
     @Override
