@@ -6,7 +6,7 @@ public interface Stackable<T> {
         T pop();
         T peek();
         void update(T item);
-
+        int size();
         boolean isFull();
         boolean isEmpty();
         String print();
