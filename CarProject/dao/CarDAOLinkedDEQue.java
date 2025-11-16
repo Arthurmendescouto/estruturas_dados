@@ -1,27 +1,11 @@
 package CarProject.dao;
 
-
+import CarProject.dao.repository.list.DEQueable;
 import CarProject.model.Car;
 import LinkedDEQue.src.main.java.org.example.LinkedDEQue;
 
 import java.time.LocalDateTime;
 
-/**
- * Implementação do DAO (Data Access Object) para gerenciamento de carros
- * utilizando uma estrutura de dados do tipo fila com dupla terminação (DEQue).
- *
- * Esta classe implementa todas as operações CRUD (Create, Read, Update, Delete)
- * e operações de consulta específicas para carros, mantendo os dados em uma
- * estrutura de fila que preserva a ordem FIFO (First In, First Out).
- *
- * @author Cláudio Rodolfo Sousa de Oliveira
- * @version 1.0
- * @since 2025-10-20
- * @see CarDAO
- * @see Car
- * @see DEQueable
- * @see LinkedDEQue
- */
 public class CarDAOLinkedDEQue implements CarDAO {
 
     private DEQueable<Car> cars = new LinkedDEQue<>(20);
@@ -29,27 +13,64 @@ public class CarDAOLinkedDEQue implements CarDAO {
     // Operações básicas CRUD
     @Override
     public void addCar(Car car) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+        cars.endEnqueue(car);
     }
 
     @Override
     public Car getCar(String plateLicense) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+        if (cars.isEmpty()) return null;
+        Car[] all = getAllCars();
+        for (Car c : all) {
+            if (c.getLicensePlate().equalsIgnoreCase(plateLicense)) {
+                return c;
+            }
+        }
+        return null;
     }
 
     @Override
     public Car[] getAllCars() {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+        if (cars.isEmpty()) return new Car[0];
+
+        Car[] arr = new Car[cars.size()];
+        for (int i = 0; i < arr.length; i++) {
+            Car removed = cars.dequeue();
+            arr[i] = removed;
+            cars.endEnqueue(removed);
+        }
+        return arr;
     }
 
     @Override
     public void updateCar(Car newCar) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+Car[] all=getAllCars();
+    clearAllCars();
+
+        for (Car c :all ) {
+if(c.getLicensePlate().equalsIgnoreCase(newCar.getLicensePlate())){
+    cars.endEnqueue(newCar);
+}else{
+    cars.endEnqueue(c);
+}
+        }
     }
 
     @Override
     public Car deleteCar(String plateLicense) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+if(cars.isEmpty())   return null;
+
+    Car removedCar=null;
+    int size=cars.size();
+
+        for (int i = 0; i <size ; i++) {
+            Car c=cars.beginDequeue();
+            if(c.getLicensePlate().equalsIgnoreCase(plateLicense)){
+                removedCar=c;
+            }else {
+                cars.endEnqueue(c);
+            }
+        }
+        return removedCar;
     }
 
     // Operações de consulta específicas para carros
