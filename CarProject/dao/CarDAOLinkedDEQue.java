@@ -76,12 +76,21 @@ if(cars.isEmpty())   return null;
     // Operações de consulta específicas para carros
     @Override
     public Car getCarByLicensePlate(String licensePlate) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
-    }
+return getCar(licensePlate);    }
 
     @Override
     public Car[] getCarsByMark(String mark) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+DEQueable<Car> results=new LinkedDEQue<>(cars.size());
+int size=cars.size();
+        for (int i = 0; i < size; i++) {
+            Car c=cars.beginDequeue();
+            if (c.getMark() != null && c.getMark().equalsIgnoreCase(mark)) {
+                results.beginEnqueue(c);
+
+            }
+            cars.endEnqueue(c);
+        }
+        return queueToArray(results);
     }
 
     @Override
@@ -123,8 +132,7 @@ if(cars.isEmpty())   return null;
 
     @Override
     public int getTotalCars() {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
-    }
+return  cars.size();    }
 
     @Override
     public String getMostPopularMark() {
@@ -164,28 +172,26 @@ if(cars.isEmpty())   return null;
 
     @Override
     public int getAvailableSpaces() {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+return (int) (((double)getTotalCars()/getMaxCapacity())*100);
     }
 
     @Override
     public boolean isParkingEmpty() {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
-    }
+return cars.isEmpty();    }
 
     @Override
     public int getMaxCapacity() {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
-    }
+return 20;    }
 
     @Override
     public int getOccupancyRate() {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+if(getMaxCapacity()==0) return 0;
+    return  (int) (((double)getOccupancyRate()/getMaxCapacity())*100);
     }
 
     @Override
     public boolean isParkingFull() {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
-    }
+return cars.size()>=getMaxCapacity();    }
 
     @Override
     public long getParkingDuration(String plateLicense) {
@@ -205,5 +211,22 @@ if(cars.isEmpty())   return null;
     @Override
     public Car[] getCarsWithLongParking(long thresholdHours) {
         throw new UnsupportedOperationException("Operação ainda não implementada");
+    }
+    private Car[] queueToArray(DEQueable<Car> queue) {
+        Car[] resultArrayCars = new Car[queue.size()];
+        int index = 0;
+        while (!queue.isEmpty()) {
+            resultArrayCars[index] = queue.dequeue();
+            index++;
+        }
+        return resultArrayCars;
+    }
+
+    private DEQueable<Car> arrayToQueue(Car[] cars) {
+        DEQueable<Car> resultQueueCars = new LinkedDEQue<>(20);  // ou a implementação concreta do seu DEQueable
+        for (Car car : cars) {
+            resultQueueCars.enqueue(car);
+        }
+        return resultQueueCars;
     }
 }
