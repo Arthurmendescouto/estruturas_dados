@@ -3,6 +3,8 @@ package CarProject.dao;
 import CarProject.dao.repository.list.DEQueable;
 import CarProject.model.Car;
 import LinkedDEQue.src.main.java.org.example.LinkedDEQue;
+
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class CarDAOLinkedDEQue implements CarDAO {
@@ -180,11 +182,11 @@ return getMostPopularAttribute("mark");    }
     @Override
     public String getMostPopularModel() {
         return getMostPopularAttribute("model");    }
-    }
+
 
     @Override
     public String getMostPopularColor() {
-        return getMostPopularAttribute("color");    }
+        return getMostPopularAttribute("color");
     }
 
     // Operações de gerenciamento
@@ -207,7 +209,9 @@ return getMostPopularAttribute("mark");    }
 
     @Override
     public Car[] getCarsByParkingDuration(long minHours, long maxHours) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+Car c=getCarByNewestArrival();
+    if(c!=null && c.getMomentArrival()!=null){}
+return Duration.between(c.getArrived(),LocalDateTime.now())    } return-1;
     }
 
     @Override
